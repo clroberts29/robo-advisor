@@ -1,4 +1,5 @@
 import requests
+import json
 
 
 # INFO INPUTS
@@ -10,6 +11,7 @@ print(type(response))
 print(response.status_code)
 print(response.text)
 
+dict_response = json.loads(response.text)
 
 quit()
 
