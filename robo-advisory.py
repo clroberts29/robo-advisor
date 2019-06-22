@@ -1,5 +1,9 @@
 import requests
 import json
+import datetime
+
+def to_usd(my_price):
+    return "${0:,.2f}".format(my_price)
 
 
 # INFO INPUTS
@@ -15,7 +19,12 @@ dict_response = json.loads(response.text)
 
 last_refreshed = dict_response["Meta Data"]["3. Last Refreshed"]
 
+dates = list(dict_response["Time Series (Daily)"].keys())
 
+last_day = dates[0]
+
+latest_close = dict_response["Time Series (Daily)"][last_day]["4. close"]
+print(latest_close)
 
 # INFO OUTPUTS
 
@@ -25,8 +34,8 @@ print("-------------------------")
 print("REQUESTING STOCK MARKET DATA...")
 print("REQUEST AT: 2018-02-20 02:00pm")
 print("-------------------------")
-print("LATEST DAY: " + last_refreshed)
-print("LATEST CLOSE: $100,000.00")
+print(f"LATEST DAY: {last_refreshed}")
+print(f"LATEST CLOSE: {to_usd(float(latest_close))}")
 print("RECENT HIGH: $101,000.00")
 print("RECENT LOW: $99,000.00")
 print("-------------------------")
