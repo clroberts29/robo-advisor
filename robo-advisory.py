@@ -19,12 +19,27 @@ dict_response = json.loads(response.text)
 
 last_refreshed = dict_response["Meta Data"]["3. Last Refreshed"]
 
-dates = list(dict_response["Time Series (Daily)"].keys())
+tsd = dict_response["Time Series (Daily)"]
+
+dates = list(tsd.keys())
 
 last_day = dates[0]
 
-latest_close = dict_response["Time Series (Daily)"][last_day]["4. close"]
-print(latest_close)
+latest_close = tsd[last_day]["4. close"]
+
+high_prices = []
+high_price = ""
+
+print(high_prices)
+
+
+for p in dates:
+    high_price = tsd[p]["2. high"]
+    high_prices.append(float(high_price))
+
+
+recent_high = max(high_prices)
+
 
 # INFO OUTPUTS
 
@@ -36,7 +51,7 @@ print("REQUEST AT: 2018-02-20 02:00pm")
 print("-------------------------")
 print(f"LATEST DAY: {last_refreshed}")
 print(f"LATEST CLOSE: {to_usd(float(latest_close))}")
-print("RECENT HIGH: $101,000.00")
+print(f"RECENT HIGH: {to_usd(float(recent_high))}")
 print("RECENT LOW: $99,000.00")
 print("-------------------------")
 print("RECOMMENDATION: BUY!")
