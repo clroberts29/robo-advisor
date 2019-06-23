@@ -14,7 +14,35 @@ def to_usd(my_price):
 
 # INFO INPUTS
 
-symbol = input("Please enter a valid stock ticker")
+validation = ""
+
+while validation != "validated":
+    
+    symbol = (input("Please enter a valid stock ticker."))
+    d=0
+    for c in symbol:
+        if c.isdigit():
+                d = d + 1
+
+    if len(symbol) <= 4 and d == 0:
+        validation = "validated"
+    else:
+        if len(symbol) > 4:
+            print("Invalid entry, too many characters. Please try again.")
+        else:
+            print("Invalid entry, symbol contains digits. Please try again.")
+        
+    #    if user_input in id_list:
+    #        receipt_list.append(user_input)
+    #        print(receipt_list)
+    #    else:
+    #        if isinstance(user_input, int):
+
+
+
+
+# Initial validation of input
+
 api_key = os.environ.get("api_key")
 
 request_url = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={symbol}&apikey={api_key}"
@@ -56,7 +84,7 @@ recent_low = min(low_prices)
 
 # INFO OUTPUTS
 
-csv_file_path = "prices.csv"
+csv_file_path = "data\prices.csv"
 
 #csv_file_path = os.path.join(os.path.dirname(__file__), "..", "data", "prices.csv")
 
