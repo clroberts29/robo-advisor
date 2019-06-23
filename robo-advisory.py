@@ -107,6 +107,19 @@ with open(csv_file_path, "w") as csv_file:
             "volume": tsd[date]["5. volume"]        
         })
 
+recommend = ""
+recommend_reason = ""
+
+if float(latest_close) < float(recent_low) * 1.15:
+    recommend = "BUY"
+    recommend_reason = "This stock is near its low, so let's follow the old maxim, 'Buy low and sell high.'"
+else:
+    if float(latest_close) > float(recent_high) * .85:
+        recommend = "SELL"
+        recommend_reason = "This stock is near its high, so let's follow the old maxim, 'Buy low and sell high.'"
+    else:
+        recommend = "HOLD"
+        recommend_reason = "This stock is neither near its high nor near its low. So let's hang on to it for now and see what happens."
 
 
 print("-------------------------")
@@ -120,8 +133,8 @@ print(f"LATEST CLOSE: {to_usd(float(latest_close))}")
 print(f"RECENT HIGH: {to_usd(float(recent_high))}")
 print(f"RECENT LOW: {to_usd(float(recent_low))}")
 print("-------------------------")
-print("RECOMMENDATION: BUY!")
-print("RECOMMENDATION REASON: TODO")
+print(f"RECOMMENDATION: {recommend}")
+print(f"RECOMMENDATION REASON: {recommend_reason}")
 print("-------------------------")
 print(f"WRITING DATA TO CSV: {csv_file_path}...")
 print("-------------------------")
