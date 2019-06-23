@@ -5,5 +5,7 @@
 # ignore all files in this directory:
 prices.csv
 
+#test
+
 # except this gitignore file:
 !.gitignore
