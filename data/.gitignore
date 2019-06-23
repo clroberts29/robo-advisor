@@ -4,6 +4,7 @@
 
 # ignore all files in this directory:
 prices.csv
+*
 
 #test
 
