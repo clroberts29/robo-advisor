@@ -1,6 +1,8 @@
 import requests
 import json
 import datetime
+import os
+import csv
 
 def to_usd(my_price):
     return "${0:,.2f}".format(my_price)
@@ -43,7 +45,29 @@ recent_high = max(high_prices)
 recent_low = min(low_prices)
 
 
+
+
 # INFO OUTPUTS
+
+csv_file_path = "prices.csv"
+
+#csv_file_path = os.path.join(os.path.dirname(__file__), "..", "data", "prices.csv")
+
+csv_headers = ["timestamp", "open", "high", "low", "close", "volume"]
+
+with open(csv_file_path, "w") as csv_file:
+    writer = csv.DictWriter(csv_file, fieldnames=csv_headers)
+    writer.writeheader()
+    writer.writerow({
+        "timestamp": "New York",
+        "open": "Yankees",
+        "high": "todo",
+        "low": "todo",
+        "close": "test",
+        "volume": "todo"        
+    })
+
+
 
 print("-------------------------")
 print("SELECTED SYMBOL: XYZ")
@@ -59,5 +83,8 @@ print("-------------------------")
 print("RECOMMENDATION: BUY!")
 print("RECOMMENDATION REASON: TODO")
 print("-------------------------")
+print(f"WRITING DATA TO CSV: {csv_file_path}...")
+print("-------------------------")
 print("HAPPY INVESTING!")
 print("-------------------------")
+
