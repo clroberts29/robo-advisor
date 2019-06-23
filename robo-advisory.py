@@ -54,7 +54,11 @@ response = requests.get(request_url)
 
 dict_response = json.loads(response.text)
 
-last_refreshed = dict_response["Meta Data"]["3. Last Refreshed"]
+try:
+    last_refreshed = dict_response["Meta Data"]["3. Last Refreshed"]
+except:
+    print("Oops! No data found for this ticker. Please try again!")
+    quit()
 
 tsd = dict_response["Time Series (Daily)"]
 
